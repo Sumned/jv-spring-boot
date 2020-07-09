@@ -1,13 +1,8 @@
 package com.dev.springboot;
 
 import com.dev.springboot.util.CsvFileReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import com.dev.springboot.util.CsvParser;
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +17,20 @@ class JvSpringBootApplicationTests {
     @Autowired
     private CsvFileReader fileReader;
 
+    @Autowired
+    private CsvParser parser;
+
     @BeforeEach
     void setUp() {
     }
 
     @Test
-    public void checkFileReader() throws IOException {
-        List<String> ls = fileReader.readFile(PATH);
-        ls.forEach(System.out::println);
-        assertEquals(3, ls.size());
-
+    public void checkFileReader() {
+        assertEquals(5, fileReader.readFile(PATH).size());
     }
 
     @Test
-    void contextLoads() {
+    public void checkParser() throws IOException {
+        assertEquals(4, parser.parse(PATH).size());
     }
-
 }
