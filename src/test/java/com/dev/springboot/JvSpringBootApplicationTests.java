@@ -27,15 +27,10 @@ class JvSpringBootApplicationTests {
     }
 
     @Test
-    public void checkFileReader() throws IOException {
+    public void checkFileReader() {
         List<String> ls = fileReader.readFile(PATH);
         ls.forEach(System.out::println);
         assertEquals(3, ls.size());
 
     }
-
-    @Test
-    void contextLoads() {
-    }
-
 }
