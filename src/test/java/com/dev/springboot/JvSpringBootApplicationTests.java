@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class JvSpringBootApplicationTests {
-    private static final String PATH = "src\\test\\resources\\test.txt";
+    private static final String PATH = "src/test/resources/test.txt";
 
     @Autowired
     private CsvFileReader fileReader;
