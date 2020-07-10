@@ -21,7 +21,7 @@ class JvSpringBootApplicationTests {
     }
 
     @Test
-    public void checkFileReader() throws UndeclaredThrowableException {
+    public void checkFileReader() {
         assertEquals(3, fileReader.readFile(PATH).size());
     }
 }
