@@ -1,7 +1,7 @@
 package com.dev.springboot;
 
 import com.dev.springboot.util.CsvFileReader;
-import java.io.IOException;
+import java.lang.reflect.UndeclaredThrowableException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +21,7 @@ class JvSpringBootApplicationTests {
     }
 
     @Test
-    void name() {
-    }
-
-    @Test
-    public void checkFileReader() throws IOException {
+    public void checkFileReader() throws UndeclaredThrowableException {
         assertEquals(3, fileReader.readFile(PATH).size());
     }
 }
