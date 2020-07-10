@@ -22,9 +22,6 @@ class JvSpringBootApplicationTests {
 
     @Test
     public void checkFileReader() {
-        List<String> ls = fileReader.readFile(PATH);
-        ls.forEach(System.out::println);
-        assertEquals(3, ls.size());
-
+        assertEquals(3, fileReader.readFile(PATH).size());
     }
 }
