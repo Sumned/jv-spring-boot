@@ -1,7 +1,7 @@
 package com.dev.springboot;
 
 import com.dev.springboot.util.CsvFileReader;
-import java.util.List;
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,11 @@ class JvSpringBootApplicationTests {
     }
 
     @Test
-    public void checkFileReader() {
+    void name() {
+    }
+
+    @Test
+    public void checkFileReader() throws IOException {
         assertEquals(3, fileReader.readFile(PATH).size());
     }
 }
