@@ -1,7 +1,6 @@
 package com.dev.springboot;
 
 import com.dev.springboot.util.CsvFileReader;
-import java.lang.reflect.UndeclaredThrowableException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class JvSpringBootApplicationTests {
-    private static final String PATH = "src/test/resources/test.txt";
+    private static final String PATH = "test.txt";
 
     @Autowired
     private CsvFileReader fileReader;
@@ -22,6 +21,6 @@ class JvSpringBootApplicationTests {
 
     @Test
     public void checkFileReader() {
-        assertEquals(3, fileReader.readFile(PATH).size());
+        assertEquals(6, fileReader.readFile(PATH).length());
     }
 }
