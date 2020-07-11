@@ -19,13 +19,9 @@ public class CsvParser {
     private final List<ParserDto> parserDtoList = new ArrayList<>();
 
     public List<ParserDto> parse(String path) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String string : fileReader.readFile(path)) {
-            stringBuilder.append(string).append("\n");
-        }
         Iterable<CSVRecord> records = CSVFormat.DEFAULT
                 .withFirstRecordAsHeader()
-                .parse(new StringReader(stringBuilder.toString()));
+                .parse(new StringReader(fileReader.readFile(path)));
         for (CSVRecord record : records) {
             if (record.size() == CsvHeaders.values().length) {
                 ParserDto dto = ParserDto.builder()
