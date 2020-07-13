@@ -37,7 +37,7 @@ public class CsvParser {
                         .summary(record.get(CsvHeaders.Summary))
                         .text(record.get(CsvHeaders.Text))
                         .build();
-                log.info(dto.toString());
+                log.info("string successfully parced" + dto.toString());
                 parserDtoList.add(dto);
             }
         }
