@@ -1,7 +1,8 @@
 package com.dev.springboot;
 
+import com.dev.springboot.dto.ParserDto;
 import com.dev.springboot.mapper.ParserMapper;
-import com.dev.springboot.service.UserService;
+import com.dev.springboot.model.User;
 import com.dev.springboot.util.CsvFileReader;
 import com.dev.springboot.util.CsvParser;
 import java.io.IOException;
@@ -11,7 +12,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -27,8 +32,6 @@ class JvSpringBootApplicationTests {
     @Autowired
     private CsvParser parser;
 
-    @Autowired
-    private UserService userService;
     @Autowired
     private ParserMapper parserMapper;
 
@@ -53,8 +56,12 @@ class JvSpringBootApplicationTests {
     }
 
     @Test
-    public void mapperDtoToDbTest() throws IOException {
-        parser.parse(PATH).forEach(parserDto -> userService.addUser(parserMapper.parser(parserDto)));
-        System.out.println("");
+    public void dtoTest() throws IOException {
+        for(ParserDto parserDto : parser.parse(PATH)) {
+            User user = parserMapper.parser(parserDto);
+            assertAll(() -> assertNotNull(user),
+                    () -> assertFalse(user.getProducts().isEmpty()),
+                    () -> assertFalse(user.getReviews().isEmpty()));
+        }
     }
 }

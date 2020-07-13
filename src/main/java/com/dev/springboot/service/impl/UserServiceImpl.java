@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
+    private static final int NUMBER = 0;
     private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;
     private final ProductRepository productRepository;
@@ -20,8 +21,8 @@ public class UserServiceImpl implements UserService {
         User userDb = new User();
         userDb.setUserId(user.getUserId());
         userDb.setProfileName(user.getProfileName());
-        userDb.getProducts().add(productRepository.save(user.getProducts().get(0)));
-        userDb.getReviews().add(reviewRepository.save(user.getReviews().get(0)));
+        userDb.getProducts().add(productRepository.save(user.getProducts().get(NUMBER)));
+        userDb.getReviews().add(reviewRepository.save(user.getReviews().get(NUMBER)));
         return userRepository.save(userDb);
     }
 }
