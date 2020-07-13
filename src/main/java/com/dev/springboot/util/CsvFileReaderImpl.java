@@ -22,7 +22,7 @@ public class CsvFileReaderImpl implements CsvFileReader {
                             .getClassLoader().getResource(path)).toURI();
             @Cleanup Stream<String> stringStream = Files.lines(Paths.get(resource));
             return stringStream.map(s -> s + "\n").collect(Collectors.joining());
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException | URISyntaxException | NullPointerException e) {
             throw new UndeclaredThrowableException(e, "Can't read file with reader");
         }
     }
