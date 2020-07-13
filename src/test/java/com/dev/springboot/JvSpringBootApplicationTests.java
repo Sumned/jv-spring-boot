@@ -1,5 +1,7 @@
 package com.dev.springboot;
 
+import com.dev.springboot.mapper.ParserMapper;
+import com.dev.springboot.service.UserService;
 import com.dev.springboot.util.CsvFileReader;
 import com.dev.springboot.util.CsvParser;
 import java.io.IOException;
@@ -25,6 +27,11 @@ class JvSpringBootApplicationTests {
     @Autowired
     private CsvParser parser;
 
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ParserMapper parserMapper;
+
     @BeforeEach
     void setUp() {
     }
@@ -43,5 +50,11 @@ class JvSpringBootApplicationTests {
     public void csvFileReaderThrowsExceptionTest() {
         assertThrows(UndeclaredThrowableException.class,
                 () -> fileReader.readFile(INVALID_FILE_PATH));
+    }
+
+    @Test
+    public void mapperDtoToDbTest() throws IOException {
+        parser.parse(PATH).forEach(parserDto -> userService.addUser(parserMapper.parser(parserDto)));
+        System.out.println("");
     }
 }
