@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class ParserMapper {
+    private static final String WORD = "food";
 
     public User parser(ParserDto dto) {
         Review review = Review.builder()
@@ -26,6 +27,10 @@ public class ParserMapper {
                 .build();
         Product product = new Product();
         product.setProductId(dto.getProductId());
+        product.setFood(review.getText()
+                .toLowerCase().contains(WORD)
+                || review.getSummary()
+                .toLowerCase().contains(WORD));
         User user = new User();
         user.getReviews().add(review);
         user.getProducts().add(product);

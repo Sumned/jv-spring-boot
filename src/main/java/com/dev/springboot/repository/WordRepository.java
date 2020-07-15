@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
 
-    @Query("select w.id, w.text " +
-            "from Word w group by w.text order by count (w.text) desc")
-    Page<Word> queryFirst1000(Pageable pageable);
+    @Query("select w.text, count (w.text) as counter "
+            + "from Word w group by w.text order by count (w.text) desc")
+    Page<Word> getAll(Pageable pageable);
 }

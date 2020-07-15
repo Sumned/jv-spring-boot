@@ -5,7 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface WordService {
-    Page<Word> findWordByLimit(Pageable pageable);
+
+    Page<Word> getAll(Pageable pageable);
 
     void save(Word word);
 }
