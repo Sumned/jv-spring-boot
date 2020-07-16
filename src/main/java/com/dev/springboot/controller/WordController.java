@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class WordController {
     private final WordService wordService;
+    private static final int NUMBER = 1000;
 
-    @GetMapping
-    public Page<Word> get(@PageableDefault(page = 0, size = 1000) Pageable pageable) {
+    @GetMapping("/frequently-used")
+    public Page<Word> getMostFrequently(@PageableDefault(size = NUMBER) Pageable pageable) {
         return wordService.getAll(pageable);
     }
 }

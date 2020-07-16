@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class ProductController {
     private final ProductService productService;
+    private static final int NUMBER = 1000;
 
-    @GetMapping
-    public Page<String> get(@PageableDefault(page = 0, size = 1000) Pageable pageable) {
+    @GetMapping("/most-commented")
+    public Page<String> getMostCommented(@PageableDefault(size = NUMBER) Pageable pageable) {
         return productService.getAll(pageable);
     }
 }
