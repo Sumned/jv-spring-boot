@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 public class UserController {
-    private final UserService userService;
     private static final int NUMBER = 1000;
+    private final UserService userService;
 
     @GetMapping("/most-active")
     public Page<String> getMostActive(@PageableDefault(size = NUMBER) Pageable pageable) {
