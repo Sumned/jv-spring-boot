@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 public class ProductController {
+    private static final int NUMBER = 1000;
     private final ProductService productService;
 
-    @GetMapping
-    public Page<String> get(@PageableDefault(page = 0, size = 1000) Pageable pageable) {
+    @GetMapping("/most-commented")
+    public Page<String> getMostCommented(@PageableDefault(size = NUMBER) Pageable pageable) {
         return productService.getAll(pageable);
     }
 }

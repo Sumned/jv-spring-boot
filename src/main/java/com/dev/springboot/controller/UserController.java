@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 public class UserController {
+    private static final int NUMBER = 1000;
     private final UserService userService;
 
-    @GetMapping
-    public Page<String> get(@PageableDefault(page = 0, size = 1000) Pageable pageable) {
+    @GetMapping("/most-active")
+    public Page<String> getMostActive(@PageableDefault(size = NUMBER) Pageable pageable) {
         return userService.getAll(pageable);
     }
 }
