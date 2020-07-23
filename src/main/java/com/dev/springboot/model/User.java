@@ -1,35 +1,41 @@
 package com.dev.springboot.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
-import org.hibernate.annotations.Cascade;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity
 @Table(name = "users")
+@Data
+@NoArgsConstructor
 public class User {
     @Id
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private String profileName;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_products",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "productId")
-    )
-    private List<Product> products = new ArrayList<>();
+    @Column(name = "password")
+    private String password;
 
-    @OneToMany
-    @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    private List<Review> reviews = new ArrayList<>();
+    @Column(name = "email", unique = true)
+    private String email;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles = new HashSet<>();
+
+    public void addRoles(Role role) {
+        roles.add(role);
+    }
+
 }

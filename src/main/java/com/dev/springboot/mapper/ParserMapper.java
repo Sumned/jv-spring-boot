@@ -3,7 +3,7 @@ package com.dev.springboot.mapper;
 import com.dev.springboot.dto.ParserDto;
 import com.dev.springboot.model.Product;
 import com.dev.springboot.model.Review;
-import com.dev.springboot.model.User;
+import com.dev.springboot.model.UserCsv;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.TimeZone;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class ParserMapper {
     private static final String WORD = "food";
 
-    public User parser(ParserDto dto) {
+    public UserCsv parser(ParserDto dto) {
         Review review = Review.builder()
                 .helpfulnessNumerator(dto.getHelpfulnessNumerator())
                 .helpfulnessDenominator(dto.getHelpfulnessDenominator())
@@ -31,7 +31,7 @@ public class ParserMapper {
                 .toLowerCase().contains(WORD)
                 || review.getSummary()
                 .toLowerCase().contains(WORD));
-        User user = new User();
+        UserCsv user = new UserCsv();
         user.getReviews().add(review);
         user.getProducts().add(product);
         user.setUserId(dto.getUserId());
