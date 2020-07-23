@@ -26,7 +26,7 @@ public class AuthenticationController {
     @PostMapping
     public HttpStatus register(@RequestBody UserRequestDto requestDto) {
         log.info("try to register user " + requestDto.getEmail());
-        try{
+        try {
             authenticationService.register(userMapper
                     .getUserFromRequestDto(requestDto));
             log.info("registration successful " + requestDto.getEmail());
