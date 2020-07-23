@@ -26,12 +26,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(getEncoder());
     }
 
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/registration", "/users/create_admin", "/swagger/**",
-                        "/swagger-resources/**", "/v2/api-docs", "/webjars/**").permitAll()
+                .antMatchers("/registration",
+                        "/swagger/**",
+                        "/users/create_admin",
+                        "/v3/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**")
+                .permitAll()
                 .antMatchers(HttpMethod.POST,"/products/**", "/users/**")
                 .hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/inject",
@@ -47,9 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout().permitAll().logoutUrl("/logout").logoutSuccessUrl("/login")
                 .and()
-                    .csrf().ignoringAntMatchers("/h2-console/**")
-                .and()
-                    .headers().frameOptions().sameOrigin();
+                    .csrf().disable();
     }
 
     @Bean
