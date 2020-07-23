@@ -32,7 +32,7 @@ public class UserController {
         authenticationService.register(user);
         return "admin injected";
     }
-
+  
     @GetMapping("/most-active")
     public Page<String> getMostActive(@PageableDefault(size = NUMBER) Pageable pageable) {
         return userService.getAll(pageable);
